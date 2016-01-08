@@ -30,7 +30,7 @@ function login(){
 //	alert('yyyy');
 	
 	$.ajax({
-        url: "http://127.0.0.1:8000/login/",
+        url: "http://166.111.143.200:8000/login/",
         dataType: 'jsonp',
         type: 'POST',
         jsonpCallback: 'callback',
@@ -44,11 +44,11 @@ function login(){
             //alert("success!");
         	if(data.message == 'Login success!'){
         		alert("Info received:" + data.message);
-        		window.location.href="http://localhost:8080/BigDataPlatform/pages/index.html";
+        		window.location.href="http://166.111.143.200:8080/BigDataPlatform/WebContent/pages/index.html";
         	}        		
         	else{
         		alert("Info received:" + data.message);
-        		window.location.href="http://localhost:8080/BigDataPlatform/pages/login.html";
+        		window.location.href="http://166.111.143.200:8080/BigDataPlatform/WebContent/pages/login.html";
         	}
         		        	        	
         },
