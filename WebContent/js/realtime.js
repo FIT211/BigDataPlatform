@@ -1,124 +1,255 @@
-setTimeout(function(){Push();},1000);
 setInterval(function(){Push();},1000);
-function Push(){
+var i = 0;
 
-$.ajax({
-            url: "http://localhost:8000/OfflineApplicationLayerResults/",
+function Push(){
+	
+	if (i == 0 || i == 60){
+		
+		i == 0;
+		$.ajax({
+    		url: "http://166.111.143.200:8000/RealtimeApplicationThroughput/Minute",
+    		dataType: 'jsonp',
+    		type: 'GET',
+    		jsonpCallback: 'callback',          
+    		success: function (data2) {           	           	        		            	
+		
+    		var throuput_minute = new Array();    
+    		var countPacket_minute = new Array();   		
+    		
+    		var time_minute = new Array();
+    		var count_minute = 0;
+    		
+    		for (count_minute = 0; count_minute < 1440; count_minute ++) {
+    			
+    			time_minute[count_minute] = 1440 - count_minute;
+    			
+    		}
+		
+    		for (x in data2) {           	
+			    		
+    			throuput_minute[x] = data2[x].throuput_minute/1000;   
+    			countPacket_minute[x] = data2[x].countPacket_minute;   			
+			
+    		}	
+				
+    		require.config({
+    			paths: {
+    				echarts: '../js'
+    			}
+    		});
+		 
+    		require(
+    		[
+    		 	'echarts',
+    		 	'echarts/chart/line',          
+    		],
+        
+    		DrawEcharts2
+    		
+    		);	
+
+    		function DrawEcharts2 (ec){
+        	
+    			DrawEchart3 (ec);
+    			DrawEchart4 (ec);
+        	
+    		}
+        
+    		function DrawEchart3 (ec) {
+    			var myChart3 = ec.init(document.getElementById('realtime-chart2')); 
+            
+    			option = {
+            		color : ['#87cefa'],
+            	    title : {
+            	        text: '吞吐量统计数据（一天内）',
+            	        subtext:'单位：kb/s'
+            	    },
+            	    tooltip : {
+            	        trigger: 'axis',
+            	        axisPointer:{
+            	        	type:'shadow'
+            	        }
+            	    },
+            	    legend: {
+            	        data:['吞吐量（分钟级）'],
+            	        y:"bottom"
+            	    },
+            	    toolbox: {
+            	    	show : true,
+            	        feature : {
+            	            mark : {show: true},
+            	            dataView : {show: true, readOnly: false},	                	            
+            	            restore : {show: true},
+            	            saveAsImage : {show: true}
+            	        }
+            	    },
+            	    claculable:true,
+            	    xAxis : [
+            	        {
+            	            type : 'category',
+            	            //splitLine:{show:false},
+            	            data : time_minute
+            	        }
+            	    ],
+            	    yAxis : [
+            	        {
+            	            type : 'value'
+            	        }
+            	    ],
+            	    series : [
+            	        {
+            	            name:'吞吐量（分钟级）',
+            	        	type:'line',
+            	        	stack:'Application',
+            	        	itemStyle:{normal:{areaStyle:{type:'default'}}},
+            	            data:throuput_minute 
+            	            //markLine:{
+            	            //	data:[{
+            	            //		type:"max",
+            	            //		name:"MAX"
+            	            //	},{
+            	            //		type:"min",
+            	            //		name:"MIN"
+            	            //	}]
+            	            //}
+            	        },  	                	                        	       
+            	    ],
+            	    animation:false,
+            	};
+    			myChart3.setOption(option); 
+    		}
+        
+    		function DrawEchart4 (ec) {
+    			var myChart4 = ec.init(document.getElementById('realtime-chart4')); 
+            
+    			option = {
+            		color : ['#87cefa'],
+            	    title : {
+            	        text: '分组统计数据（一天内）',
+            	        subtext:'单位：个/s'
+            	    },
+            	    tooltip : {
+            	        trigger: 'axis',
+            	        axisPointer:{
+            	        	type:'shadow'
+            	        }
+            	    },
+            	    legend: {
+            	        data:['分组（分钟级）'],
+            	        y:"bottom"
+            	    },
+            	    toolbox: {
+            	    	show : true,
+            	        feature : {
+            	            mark : {show: true},
+            	            dataView : {show: true, readOnly: false},	                	            
+            	            restore : {show: true},
+            	            saveAsImage : {show: true}
+            	        }
+            	    },
+            	    claculable:true,
+            	    xAxis : [
+            	        {
+            	            type : 'category',
+            	            //splitLine:{show:false},
+            	            data : time_minute
+            	        }
+            	    ],
+            	    yAxis : [
+            	        {
+            	            type : 'value'
+            	        }
+            	    ],
+            	    series : [
+            	        {
+            	            name:'分组（分钟级）',
+            	        	type:'line',
+            	        	stack:'Application',
+            	        	itemStyle:{normal:{areaStyle:{type:'default'}}},
+            	            data:countPacket_minute 
+            	            //markLine:{
+            	            //	data:[{
+            	            //		type:"max",
+            	            //		name:"MAX"
+            	            //	},{
+            	            //		type:"min",
+            	            //		name:"MIN"
+            	            //	}]
+            	            //}
+            	        },  	                	                        	       
+            	    ],
+            	    animation:false,
+            	};
+    			myChart4.setOption(option); 
+    		}
+	    
+    		}//.bind(this),
+    		//error: function (xhr, status, err) {
+    		//    alert('Error:' + err);
+    		//    alert("error");
+    		//}.bind(this)
+		});		
+	}
+	else{
+		
+		$.ajax({
+            url: "http://166.111.143.200:8000/RealtimeApplicationThroughput/Second",
             dataType: 'jsonp',
             type: 'GET',
             jsonpCallback: 'callback',          
-            success: function (data) {           	           	        		            	
+            success: function (data1) {           	           	        		            	
         		
-        	               var throuput = new Array();    
-        		var countPacket = new Array();
-            
-        		var count=0;
+        		var throuput_second = new Array();    
+        		var countPacket_second = new Array();
         		
-        		for (x in data) {
-        			
-        			throuput[x] = data[x].throuput;   
-        			countPacket[x] = data[x].countPacket;
-        			count++;
-        			
-        		}	
+        		var time_second = new Array();
+        		var count_second = 0;
         		
-        		for (;count<60;count++){
+        		for (count_second = 0; count_second < 3600; count_second ++) {
         			
-    			throuput[count] = 0;  	
-    			countPacket[count] = 0;
-    				
-    		}
+        			time_second[count_second] = 3600 - count_second;
+        			
+        		}
+                   		
+        		for (x in data1) {           	
+        			
+        			throuput_second[x] = data1[x].throuput_second/1000;   
+        			countPacket_second[x] = data1[x].countPacket_second;
+        			
+        		}	        		       		
         		
         		require.config({
-		                paths: {
-		                              echarts: '../js'
-		                }
-		});
+		            paths: {
+		                echarts: '../js'
+		            }
+		        });
    			 
         		require(
-	                                [
-	                                               'echarts',
-	                                               'echarts/chart/line',
-        	                                ],
-	                               DrawEcharts
-    	                );	
-	
-	                function DrawEcharts (ec){
-	            	
-	            	              DrawEchart1 (ec);
-	            	              DrawEchart2 (ec);
-	                }
-	            
-	                function DrawEchart1 (ec) {
-	                               var myChart1 = ec.init(document.getElementById('realtime-chart1')); 
+	            [
+	                'echarts',
+	                'echarts/chart/line',
 	               
-	                                option = 
-                                                {
-	                	                title : {
-	                	                               text: '吞吐量统计数据',
-	                	                               subtext:'attention to the magnitude'
-	                	                },
-	                	                tooltip : {
-	                	                                trigger: 'axis',
-	                	                                axisPointer:{
-	                	                                              type:'shadow'
-	                	                                }
-	                	                },
-	                	                legend: {
-	                	                                data:['throuput','count'],
-	                	                                y:"bottom"
-	                	                },
-	                	                toolbox: {
-	                	                                show : true,
-	                	                                feature : {
-	                	                                                mark : {show: true},
-	                	                                                dataView : {show: true, readOnly: false},
-	                	                                                magicType: { show: true, type: ['line', 'bar'] },
-	                	                                                restore : {show: true},
-	                	                                                saveAsImage : {show: true}
-	                	                                }
-	                	                },
-	                	                claculable:true,
-	                	                xAxis : [
-	                	                                {
-	                	                                                type : 'category',
-	                	                                                //splitLine:{show:false},
-	                	                                                data : ['60','59','58','57','56','55','54','53','52','51','50','49','48','47','46','45','44','43','42','41','40','39','38','37','36','35','34','33','32','31','30','29','28','27','26','25','24','23','22','21','20','19','18','17','16','15','14','13','12','11','10','9','8','7','6','5','4','3','2','1']
-	                	                                }
-	                	                ],
-	                	                yAxis : [
-	                	                                {
-	                	                                                type : 'value'
-	                	                                }
-	                	                ],
-	                	                series : [
-	                	                                {
-	                	                                                name:'吞吐量',
-	                	        	                                type:'line',
-	                	        	                                stack:'Application',
-	                	        	                                itemStyle:{normal:{areaStyle:{type:'default'}}},
-	                	                                               data:throuput 
-	                	                                }, 
-                                                         	                {
-                                                                                                name:'吞吐量',
-                                                                                                type:'line',
-                                                                                                stack:'Application',
-                                                                                                itemStyle:{normal:{areaStyle:{type:'default'}}},
-                                                                                                data:countPacket 
-                                                        }, 	                        	       
-	                	                ],
-	                	                animation:false,
-	                	};
-	                                myChart1.setOption(option); 
+	            ],
+	            
+	            DrawEcharts1
+	            
+    	        );	
+	
+	            function DrawEcharts1 (ec){
+	            	
+	            	DrawEchart1 (ec);
+	            	DrawEchart2 (ec);
+	            	
 	            }
 	            
-	            function DrawEchart2 (ec) {
-	                var myChart2 = ec.init(document.getElementById('realtime-chart3')); 
+	            function DrawEchart1 (ec) {
+	                var myChart1 = ec.init(document.getElementById('realtime-chart1')); 
 	                
 	                option = {
+	                		color : ['#87cefa'],
 	                	    title : {
-	                	        text: '分组统计数据',
-	                	        subtext:'attention to the magnitude'
+	                	        text: '吞吐量统计数据（一小时内）',
+	                	        subtext:'单位：kb/s'
 	                	    },
 	                	    tooltip : {
 	                	        trigger: 'axis',
@@ -127,15 +258,14 @@ $.ajax({
 	                	        }
 	                	    },
 	                	    legend: {
-	                	        data:['countPacket'],
+	                	        data:['吞吐量（秒级）'],
 	                	        y:"bottom"
 	                	    },
 	                	    toolbox: {
 	                	        show : true,
 	                	        feature : {
-	                	            mark : {show: true},
-	                	            dataView : {show: true, readOnly: false},
-	                	            magicType: { show: true, type: ['line', 'bar'] },
+	                	            mark : {show: true},	                	            
+	                	            dataView : {show: true, readOnly: false},	                	            
 	                	            restore : {show: true},
 	                	            saveAsImage : {show: true}
 	                	        }
@@ -145,7 +275,7 @@ $.ajax({
 	                	        {
 	                	            type : 'category',
 	                	            //splitLine:{show:false},
-	                	            data : ['60','59','58','57','56','55','54','53','52','51','50','49','48','47','46','45','44','43','42','41','40','39','38','37','36','35','34','33','32','31','30','29','28','27','26','25','24','23','22','21','20','19','18','17','16','15','14','13','12','11','10','9','8','7','6','5','4','3','2','1']
+	                	            data : time_second
 	                	        }
 	                	    ],
 	                	    yAxis : [
@@ -155,11 +285,75 @@ $.ajax({
 	                	    ],
 	                	    series : [
 	                	        {
-	                	            name:'分组',
+	                	            name:'吞吐量（秒级）',
 	                	        	type:'line',
 	                	        	stack:'Application',
 	                	        	itemStyle:{normal:{areaStyle:{type:'default'}}},
-	                	            data:countPacket 
+	                	            data:throuput_second 
+	                	            //markLine:{
+	                	            //	data:[{
+	                	            //		type:"max",
+	                	            //		name:"MAX"
+	                	            //	},{
+	                	            //		type:"min",
+	                	            //		name:"MIN"
+	                	            //	}]
+	                	            //}
+	                	        },  	                	                        	       
+	                	    ],
+	                	    animation:false,
+	                	};
+	                myChart1.setOption(option); 
+	            }
+	            
+	            function DrawEchart2 (ec) {
+	                var myChart2 = ec.init(document.getElementById('realtime-chart3')); 
+	                
+	                option = {
+	                		color : ['#87cefa'],
+	                	    title : {
+	                	        text: '分组统计数据（一小时内）',
+	                	        subtext:'单位：个/s'
+	                	    },
+	                	    tooltip : {
+	                	        trigger: 'axis',
+	                	        axisPointer:{
+	                	        	type:'shadow'
+	                	        }
+	                	    },
+	                	    legend: {
+	                	        data:['分组（秒级）'],
+	                	        y:"bottom"
+	                	    },
+	                	    toolbox: {
+	                	    	show : true,
+	                	        feature : {
+	                	            mark : {show: true},
+	                	            dataView : {show: true, readOnly: false},	                	            
+	                	            restore : {show: true},
+	                	            saveAsImage : {show: true}
+	                	        }
+	                	    },
+	                	    claculable:true,
+	                	    xAxis : [
+	                	        {
+	                	            type : 'category',
+	                	            //splitLine:{show:false},
+	                	            data : time_second
+	                	        }
+	                	    ],
+	                	    yAxis : [
+	                	        {
+	                	            type : 'value'
+	                	        }
+	                	    ],
+	                	    series : [
+	                	        {
+	                	            name:'分组（秒级）',
+	                	        	type:'line',
+	                	        	stack:'Application',
+	                	        	itemStyle:{normal:{areaStyle:{type:'default'}}},
+	                	            data:countPacket_second 
 	                	            //markLine:{
 	                	            //	data:[{
 	                	            //		type:"max",
@@ -182,189 +376,7 @@ $.ajax({
             //    alert("error");
             //}.bind(this)
         });
-
-$.ajax({
-    url: "http://166.111.143.200:8000/RealtimeApplicationThroughput/Minute",
-    dataType: 'jsonp',
-    type: 'GET',
-    jsonpCallback: 'callback',          
-    success: function (data) {           	           	        		            	
-		
-		var throuput = new Array();    
-		var countPacket = new Array();
-    
-		var count=0;
-		
-		for (x in data) {           	
-			
-			throuput[x] = data[x].throuput;   
-			countPacket[x] = data[x].countPacket;
-			count++;
-			
-		}	
-		
-		for (;count<60;count++){
-			
-			throuput[count] = 0;  	
-			countPacket[count] = 0;
-			
-		}
-		
-		require.config({
-            paths: {
-                echarts: '../js'
-            }
-        });
-		 
-		require(
-        [
-            'echarts',
-            'echarts/chart/line',
-           
-        ],
-        DrawEcharts
-        );	
-
-        function DrawEcharts (ec){
-        	
-        	DrawEchart1 (ec);
-        	DrawEchart2 (ec);
-        	
-        }
-        
-        function DrawEchart1 (ec) {
-            var myChart1 = ec.init(document.getElementById('realtime-chart2')); 
-            
-            option = {
-            	    title : {
-            	        text: '吞吐量统计数据',
-            	        subtext:'attention to the magnitude'
-            	    },
-            	    tooltip : {
-            	        trigger: 'axis',
-            	        axisPointer:{
-            	        	type:'shadow'
-            	        }
-            	    },
-            	    legend: {
-            	        data:['throuput'],
-            	        y:"bottom"
-            	    },
-            	    toolbox: {
-            	        show : true,
-            	        feature : {
-            	            mark : {show: true},
-            	            dataView : {show: true, readOnly: false},
-            	            magicType: { show: true, type: ['line', 'bar'] },
-            	            restore : {show: true},
-            	            saveAsImage : {show: true}
-            	        }
-            	    },
-            	    claculable:true,
-            	    xAxis : [
-            	        {
-            	            type : 'category',
-            	            //splitLine:{show:false},
-            	            data : ['60','59','58','57','56','55','54','53','52','51','50','49','48','47','46','45','44','43','42','41','40','39','38','37','36','35','34','33','32','31','30','29','28','27','26','25','24','23','22','21','20','19','18','17','16','15','14','13','12','11','10','9','8','7','6','5','4','3','2','1']
-            	        }
-            	    ],
-            	    yAxis : [
-            	        {
-            	            type : 'value'
-            	        }
-            	    ],
-            	    series : [
-            	        {
-            	            name:'吞吐量',
-            	        	type:'line',
-            	        	stack:'Application',
-            	        	itemStyle:{normal:{areaStyle:{type:'default'}}},
-            	            data:throuput 
-            	            //markLine:{
-            	            //	data:[{
-            	            //		type:"max",
-            	            //		name:"MAX"
-            	            //	},{
-            	            //		type:"min",
-            	            //		name:"MIN"
-            	            //	}]
-            	            //}
-            	        },  	                	                        	       
-            	    ],
-            	    animation:false,
-            	};
-            myChart1.setOption(option); 
-        }
-        
-        function DrawEchart2 (ec) {
-            var myChart2 = ec.init(document.getElementById('realtime-chart4')); 
-            
-            option = {
-            	    title : {
-            	        text: '分组统计数据',
-            	        subtext:'attention to the magnitude'
-            	    },
-            	    tooltip : {
-            	        trigger: 'axis',
-            	        axisPointer:{
-            	        	type:'shadow'
-            	        }
-            	    },
-            	    legend: {
-            	        data:['countPacket'],
-            	        y:"bottom"
-            	    },
-            	    toolbox: {
-            	        show : true,
-            	        feature : {
-            	            mark : {show: true},
-            	            dataView : {show: true, readOnly: false},
-            	            magicType: { show: true, type: ['line', 'bar'] },
-            	            restore : {show: true},
-            	            saveAsImage : {show: true}
-            	        }
-            	    },
-            	    claculable:true,
-            	    xAxis : [
-            	        {
-            	            type : 'category',
-            	            //splitLine:{show:false},
-            	            data : ['60','59','58','57','56','55','54','53','52','51','50','49','48','47','46','45','44','43','42','41','40','39','38','37','36','35','34','33','32','31','30','29','28','27','26','25','24','23','22','21','20','19','18','17','16','15','14','13','12','11','10','9','8','7','6','5','4','3','2','1']
-            	        }
-            	    ],
-            	    yAxis : [
-            	        {
-            	            type : 'value'
-            	        }
-            	    ],
-            	    series : [
-            	        {
-            	            name:'分组',
-            	        	type:'line',
-            	        	stack:'Application',
-            	        	itemStyle:{normal:{areaStyle:{type:'default'}}},
-            	            data:countPacket 
-            	            //markLine:{
-            	            //	data:[{
-            	            //		type:"max",
-            	            //		name:"MAX"
-            	            //	},{
-            	            //		type:"min",
-            	            //		name:"MIN"
-            	            //	}]
-            	            //}
-            	        },  	                	                        	       
-            	    ],
-            	    animation:false,
-            	};
-            myChart2.setOption(option); 
-        }
-	    
-    }//.bind(this),
-    //error: function (xhr, status, err) {
-    //    alert('Error:' + err);
-    //    alert("error");
-    //}.bind(this)
-});
-
+	}    
+	
+	i ++;
 };

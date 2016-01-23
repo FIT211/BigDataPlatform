@@ -138,7 +138,7 @@
                                             <a href="my-panels.html">定制我的仪表盘</a>
                                         </li>                                      
                                     </ul>
-                                </li>                                
+                                </li>                                  
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -173,7 +173,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="page-header">首页</h2>
+                    <h2 class="page-header">定制我的仪表盘</h2>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -182,67 +182,79 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            	实时应用吞吐量（秒级）曲线图
+                            	我的仪表盘
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body" id="div1">
-                            <div id="realtime-chart1" style="height: 250px;width:1000px"></div>
+                        <div class="panel-body">                           
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form role="form">
+                                        <div class="form-group">
+                                            <label>仪表盘名称</label>
+                                            <input class="form-control" placeholder="仪表盘名称" id="panel-name" value="">                                          
+                                        </div>                                       
+                                        <div class="form-group">
+                                            <label>可选图表组件</label>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="1" id="checkbox1">实时应用吞吐量
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="2" id="checkbox2">实时应用数据包
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="3" id="checkbox3">实时应用流
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="4" id="checkbox4">实时源国家吞吐量
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="5" id="checkbox5">实时目的国家吞吐量
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="6" id="checkbox6">实时应用统计表
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="7" id="checkbox7">实时应用饼图
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="8" id="checkbox8">实时源国家饼图
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="9" id="checkbox9">实时目的国家饼图
+                                                </label>
+                                            </div>                                           
+                                        </div>
+                                        <input type="button" id="btn1" value="确定"/>
+                                        <!--  button type="submit" class="btn btn-default" id="btn1">确定</button  -->
+                                        <!--  button type="reset" class="btn btn-default">重置</button  -->
+                                    </form>
+                                </div>
+                                <!-- /.col-lg-12 (nested) -->                               
+                            </div>
+                            <!-- /.row (nested) -->                       
                         </div>
                         <!-- /.panel-body -->
-                        <input type="button" value="隐藏" onclick="hiden1()"/> 
-                        <input type="button" value="显示" onclick="show1()"/>
                     </div>
                     <!-- /.panel -->
                 </div>
-                <!-- /.col-lg-12 -->
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            	实时应用吞吐量（分钟级）曲线图
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body" id="div2">
-                            <div id="realtime-chart2" style="height: 250px;width:1000px"></div>
-                        </div>
-                        <!-- /.panel-body -->
-                        <input type="button" value="隐藏" onclick="hiden2()"/> 
-                        <input type="button" value="显示" onclick="show2()"/>
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-12 -->
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            	实时应用分组（秒级）曲线图
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body" id="div3">
-                            <div id="realtime-chart3" style="height: 250px;width:1000px"></div>
-                        </div>
-                        <!-- /.panel-body -->
-                        <input type="button" value="隐藏" onclick="hiden3()"/> 
-                        <input type="button" value="显示" onclick="show3()"/>
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-12 -->
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                           	 	实时应用分组（分钟级）曲线图
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body" id="div4">
-                            <div id="realtime-chart4" style="height: 250px;width:1000px"></div>
-                        </div>
-                        <!-- /.panel-body -->
-                        <input type="button" value="隐藏" onclick="hiden4()"/> 
-                        <input type="button" value="显示" onclick="show4()"/>
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-12 -->                                             
+                <!-- /.col-lg-12 -->                                                                                           
             </div>
             <!-- /.row -->
             <div class="row">
@@ -270,18 +282,12 @@
     <!-- Morris Charts JavaScript -->
     <script src="../bower_components/raphael/raphael-min.js"></script>
     <script src="../bower_components/morrisjs/morris.min.js"></script>
-    
-    <script src="../js/echarts.js" async></script>    
-	
-	<script src="../js/realtime.js" async></script>
-   
-    <script src="../js/my-panels.js"></script>
-    
-    <script src="../js/hidechart.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
     
+    <script src="../js/my-panels.js"></script>
+    <script src="../js/select-panels.js"></script>
 
 </body>
 

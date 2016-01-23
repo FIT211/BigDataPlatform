@@ -138,7 +138,7 @@
                                             <a href="my-panels.html">定制我的仪表盘</a>
                                         </li>                                      
                                     </ul>
-                                </li>                                
+                                </li>                                  
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -173,76 +173,138 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="page-header">首页</h2>
+                    <h2 class="page-header">我的仪表盘</h2>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12" id="divObj1" style="display:none">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            	实时应用吞吐量（秒级）曲线图
+                            	实时应用吞吐量
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body" id="div1">
-                            <div id="realtime-chart1" style="height: 250px;width:1000px"></div>
+                        <div class="panel-body">
+                            <div id="panel1" style="height: 25px;width:1000px"></div>
                         </div>
                         <!-- /.panel-body -->
-                        <input type="button" value="隐藏" onclick="hiden1()"/> 
-                        <input type="button" value="显示" onclick="show1()"/>
                     </div>
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-12 -->
-                <div class="col-lg-12">
+                <div class="col-lg-12" id="divObj2" style="display:none">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            	实时应用吞吐量（分钟级）曲线图
+                            	实时应用数据包
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body" id="div2">
-                            <div id="realtime-chart2" style="height: 250px;width:1000px"></div>
+                        <div class="panel-body">
+                            <div id="panel2" style="height: 25px;width:1000px"></div>
                         </div>
                         <!-- /.panel-body -->
-                        <input type="button" value="隐藏" onclick="hiden2()"/> 
-                        <input type="button" value="显示" onclick="show2()"/>
                     </div>
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-12 -->
-                <div class="col-lg-12">
+                <div class="col-lg-12" id="divObj3" style="display:none">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            	实时应用分组（秒级）曲线图
+                            	实时应用流
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body" id="div3">
-                            <div id="realtime-chart3" style="height: 250px;width:1000px"></div>
+                        <div class="panel-body">
+                            <div id="panel3" style="height: 25px;width:1000px"></div>
                         </div>
                         <!-- /.panel-body -->
-                        <input type="button" value="隐藏" onclick="hiden3()"/> 
-                        <input type="button" value="显示" onclick="show3()"/>
                     </div>
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-12 -->
-                <div class="col-lg-12">
+                <div class="col-lg-12" id="divObj4" style="display:none">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                           	 	实时应用分组（分钟级）曲线图
+                           	 	实时源国家吞吐量
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body" id="div4">
-                            <div id="realtime-chart4" style="height: 250px;width:1000px"></div>
+                        <div class="panel-body">
+                            <div id="panel4" style="height: 25px;width:1000px"></div>
                         </div>
                         <!-- /.panel-body -->
-                        <input type="button" value="隐藏" onclick="hiden4()"/> 
-                        <input type="button" value="显示" onclick="show4()"/>
                     </div>
                     <!-- /.panel -->
                 </div>
-                <!-- /.col-lg-12 -->                                             
+                <!-- /.col-lg-12 --> 
+                <div class="col-lg-12" id="divObj5" style="display:none">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           	 	实时目的国家吞吐量
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="panel5" style="height: 25px;width:1000px"></div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+                <div class="col-lg-12" id="divObj6" style="display:none">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           	 	实时应用统计表
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="panel6" style="height: 25px;width:1000px"></div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+                <div class="col-lg-12" id="divObj7" style="display:none">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           	 	实时应用饼图
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="panel7" style="height: 25px;width:1000px"></div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+                <div class="col-lg-12" id="divObj8" style="display:none">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           	 	实时源国家饼图
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="panel8" style="height: 25px;width:1000px"></div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+                <div class="col-lg-12" id="divObj9" style="display:none">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           	 	实时目的国家饼图
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="panel9" style="height: 25px;width:1000px"></div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->                             
             </div>
             <!-- /.row -->
             <div class="row">
@@ -271,17 +333,13 @@
     <script src="../bower_components/raphael/raphael-min.js"></script>
     <script src="../bower_components/morrisjs/morris.min.js"></script>
     
-    <script src="../js/echarts.js" async></script>    
-	
-	<script src="../js/realtime.js" async></script>
-   
-    <script src="../js/my-panels.js"></script>
+    <script src="../js/echarts.js"></script>
     
-    <script src="../js/hidechart.js"></script>
+    <script src="../js/my-panels.js"></script>
+    <script src="../js/select-panels.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
-    
 
 </body>
 
