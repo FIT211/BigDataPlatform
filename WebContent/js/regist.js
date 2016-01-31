@@ -40,11 +40,22 @@ function regist(){
         success: function (data) {
         	
         	if(data.message == 'Create user successfully!'){
-        		alert("Info received:" + data.message);
-        		window.location.href="http://166.111.143.200:8080/BigDataPlatform/WebContent/pages/login.html";
+        		//alert("Info received:" + data.message);
+        		if(data.role == 'operator')
+        			window.location.href="http://166.111.143.200:8080/BigDataPlatform/WebContent/pages/index.html";
+        		else{
+        			if(data.role == 'administrator')
+        				window.location.href="http://166.111.143.200:8080/BigDataPlatform/WebContent/pages/index3.html";
+        			else{
+        				if(data.role == 'researcher')
+        					window.location.href="http://166.111.143.200:8080/BigDataPlatform/WebContent/pages/index2.html";
+        				else
+        					window.location.href="http://166.111.143.200:8080/BigDataPlatform/WebContent/pages/login.html"; 
+        			}        				
+        		}        		
         	}        		
         	else{
-        		alert("Info received:" + data.message);
+        		//alert("Info received:" + data.message);
         		window.location.href="http://166.111.143.200:8080/BigDataPlatform/WebContent/pages/regist.html";
         	}
         	//alert("success!");
